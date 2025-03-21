@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { audioDatabase } from "@/utils/AudioDatabase/AudioDatabase";
+import useLocalStorageState from "use-local-storage-state";
 
 const AudioPlayerContext = createContext();
 
@@ -16,6 +17,10 @@ export function AudioPlayerProvider({ children }) {
   const [songDuration, setSongDuration] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isMuted, setIsMuted] = useState(false);
+  const [playbackHistory, setPlaybackHistory] = useLocalStorageState(
+    "plackbackHistory",
+    { defaultValue: [""] }
+  );
 
   useEffect(() => {
     audioRef.current = new Audio(audioDB[0].path);
@@ -58,7 +63,25 @@ export function AudioPlayerProvider({ children }) {
       audioRef.current.src = newPath;
       audioRef.current.load();
       audioRef.current.play();
+
       setIsPlaying(true);
+    }
+  }
+
+  function handlePlaybackHistory(songToAdd) {
+    if (playbackHistory.length < 5) {
+      console.log(playbackHistory.length);
+      if (playbackHistory[0].id !== songToAdd.id) {
+        setPlaybackHistory([songToAdd, ...playbackHistory]);
+      }
+    } else {
+      const playbackHistoryNew = [...playbackHistory].toSpliced(
+        playbackHistory.length - 1,
+        1
+      );
+      if (playbackHistoryNew[0].id !== songToAdd.id) {
+        setPlaybackHistory([songToAdd, ...playbackHistoryNew]);
+      }
     }
   }
 
@@ -112,6 +135,7 @@ export function AudioPlayerProvider({ children }) {
         setIsMuted,
         handleMute,
         handleProgressBar,
+        handlePlaybackHistory,
       }}
     >
       {children}

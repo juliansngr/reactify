@@ -15,11 +15,13 @@ export default function PlaybackControls() {
   const [playbackState, setPlaybackState] = useState(true);
 
   // console.log(useAudioPlayer());
-  const { audioDB, isPlaying, togglePlayPause, currentSong } = useAudioPlayer();
-
-  function handlePlayPause() {
-    setPlaybackState(!playbackState);
-  }
+  const {
+    audioDB,
+    isPlaying,
+    togglePlayPause,
+    currentSong,
+    handlePlaybackHistory,
+  } = useAudioPlayer();
 
   return (
     <>
@@ -46,7 +48,10 @@ export default function PlaybackControls() {
               <ControlButton buttonImage={PrevIcon()} disabled={false} />
               <ControlButton
                 buttonImage={PlayPauseIcon(isPlaying)}
-                onClick={togglePlayPause}
+                onClick={() => {
+                  handlePlaybackHistory(currentSong);
+                  togglePlayPause();
+                }}
                 disabled={false}
               />
               <ControlButton buttonImage={NextIcon()} disabled={false} />

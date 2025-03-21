@@ -19,6 +19,7 @@ export default function SongCollection() {
     currentSong,
     handleTrackSelection,
     togglePlayPause,
+    handlePlaybackHistory,
   } = useAudioPlayer();
 
   const [randomTrackState, setRandomTrackState] = useState([]);
@@ -110,8 +111,11 @@ export default function SongCollection() {
                 buttonImage={PlayPauseIcon(isPlaying && audio === currentSong)}
                 onClick={() => {
                   if (audio === currentSong) {
+                    handlePlaybackHistory(audio);
+
                     togglePlayPause();
                   } else {
+                    handlePlaybackHistory(audio);
                     setCurrentSong(audio);
                     handleTrackSelection(audio.path);
                   }
