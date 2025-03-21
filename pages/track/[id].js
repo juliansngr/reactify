@@ -29,13 +29,25 @@ export default function Track() {
     return track.id === id;
   });
 
-  // if (!selectedTrack) {
-  //   return <NotFoundPage />;
-  // }
+  if (!selectedTrack) {
+    return (
+      <>
+        <Header />
+        <main className="pt-[6vh] pb-[40vh] flex flex-col items-center justify-center">
+          <h1 className="text-3xl">Track nicht gefunden</h1>
+          <Link href="/">
+            <GeneralButton buttonText="← Zurück zur Startseite" />
+          </Link>
+        </main>
+      </>
+    );
+  }
 
   useEffect(() => {
-    getAudioDuration(selectedTrack.path);
-  });
+    if (selectedTrack?.path) {
+      getAudioDuration(selectedTrack.path);
+    }
+  }, [selectedTrack]);
 
   function getAudioDuration(filePath) {
     const audioForDuration = new Audio(filePath);
@@ -65,6 +77,7 @@ export default function Track() {
             <img
               src={selectedTrack.cover}
               className="w-full max-w-64 rounded-md md:mr-3"
+              alt="Track Cover"
             />
             <span className="flex flex-col text-left">
               <p>Single</p>
