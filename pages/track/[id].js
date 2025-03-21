@@ -29,20 +29,6 @@ export default function Track() {
     return track.id === id;
   });
 
-  if (!selectedTrack) {
-    return (
-      <>
-        <Header />
-        <main className="pt-[6vh] pb-[40vh] flex flex-col items-center justify-center">
-          <h1 className="text-3xl">Track nicht gefunden</h1>
-          <Link href="/">
-            <GeneralButton buttonText="← Zurück zur Startseite" />
-          </Link>
-        </main>
-      </>
-    );
-  }
-
   useEffect(() => {
     if (selectedTrack?.path) {
       getAudioDuration(selectedTrack.path);
@@ -66,6 +52,20 @@ export default function Track() {
 
       setDuration(durationString);
     });
+  }
+
+  if (!selectedTrack) {
+    return (
+      <>
+        <Header />
+        <main className="pt-[6vh] pb-[40vh] flex flex-col items-center justify-center">
+          <h1 className="text-3xl">Track nicht gefunden</h1>
+          <Link href="/">
+            <GeneralButton buttonText="← Zurück zur Startseite" />
+          </Link>
+        </main>
+      </>
+    );
   }
 
   return (
