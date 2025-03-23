@@ -95,7 +95,7 @@ export function AudioPlayerProvider({ children }) {
 
   function handlePlaybackHistory(songToAdd) {
     if (playbackHistory.length < 5) {
-      console.log(playbackHistory.length);
+      // console.log(playbackHistory.length);
       if (!playbackHistory[0] || playbackHistory[0].id !== songToAdd.id) {
         setPlaybackHistory([songToAdd, ...playbackHistory]);
       }
@@ -111,10 +111,10 @@ export function AudioPlayerProvider({ children }) {
   }
 
   function handlePreviousTrack() {
-    console.log("historypointer:", historyPointer);
-    console.log(playbackHistory[historyPointer]);
+    // console.log("historypointer:", historyPointer);
+    // console.log(playbackHistory[historyPointer]);
     if (playbackHistory.length === 1) {
-      console.log("Nur ein Song in der History!");
+      // console.log("Nur ein Song in der History!");
       setCurrentSong(playbackHistory[historyPointer]);
       handleTrackSelection(playbackHistory[historyPointer].path);
       return;
@@ -128,7 +128,7 @@ export function AudioPlayerProvider({ children }) {
   }
 
   function handleNextTrack() {
-    console.log("historypointerNext:", historyPointer - 1);
+    // console.log("historypointerNext:", historyPointer - 1);
     // console.log(playbackHistory[historyPointer]);
 
     setCurrentSong(playbackHistory[historyPointer - 1]);
