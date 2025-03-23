@@ -18,6 +18,7 @@ export default function Track() {
     isPlaying,
     togglePlayPause,
     handleTrackSelection,
+    playNewTrack,
   } = useAudioPlayer();
 
   const router = useRouter();
