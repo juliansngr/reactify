@@ -20,6 +20,7 @@ export default function SongCollection() {
     handleTrackSelection,
     togglePlayPause,
     handlePlaybackHistory,
+    playNewTrack,
   } = useAudioPlayer();
 
   const [randomTrackState, setRandomTrackState] = useState([]);
@@ -117,7 +118,8 @@ export default function SongCollection() {
                   } else {
                     handlePlaybackHistory(audio);
                     setCurrentSong(audio);
-                    handleTrackSelection(audio.path);
+                    playNewTrack(audio);
+                    // handleTrackSelection(audio.path);
                   }
                 }}
               />

@@ -100,7 +100,8 @@ export default function Track() {
                   togglePlayPause();
                 } else {
                   setCurrentSong(selectedTrack);
-                  handleTrackSelection(selectedTrack.path);
+                  playNewTrack(selectedTrack);
+                  // handleTrackSelection(selectedTrack.path);
                 }
               }}
             />
@@ -116,7 +117,8 @@ export default function Track() {
               className="flex justify-between items-center py-2 px-5 rounded-md lg:hover:bg-[#212121] group"
               onClick={() => {
                 setCurrentSong(selectedTrack);
-                handleTrackSelection(selectedTrack.path);
+                playNewTrack(selectedTrack);
+                // handleTrackSelection(selectedTrack.path);
               }}
             >
               <span className=" block group-hover:hidden text-[#ababab] w-4">

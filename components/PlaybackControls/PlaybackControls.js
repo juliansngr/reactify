@@ -21,6 +21,10 @@ export default function PlaybackControls() {
     togglePlayPause,
     currentSong,
     handlePlaybackHistory,
+    historyPointer,
+    playbackHistory,
+    handlePreviousTrack,
+    handleNextTrack,
   } = useAudioPlayer();
 
   return (
@@ -45,7 +49,13 @@ export default function PlaybackControls() {
               <ControlButton buttonImage={NextIcon()} disabled={true} />
             </SignedOut>
             <SignedIn>
-              <ControlButton buttonImage={PrevIcon()} disabled={false} />
+              <ControlButton
+                buttonImage={PrevIcon()}
+                onClick={() => {
+                  handlePreviousTrack();
+                }}
+                disabled={historyPointer >= playbackHistory.length - 1}
+              />
               <ControlButton
                 buttonImage={PlayPauseIcon(isPlaying)}
                 onClick={() => {
@@ -54,7 +64,13 @@ export default function PlaybackControls() {
                 }}
                 disabled={false}
               />
-              <ControlButton buttonImage={NextIcon()} disabled={false} />
+              <ControlButton
+                onClick={() => {
+                  handleNextTrack();
+                }}
+                buttonImage={NextIcon()}
+                disabled={historyPointer <= 0}
+              />
             </SignedIn>
           </div>
           <SignedOut>

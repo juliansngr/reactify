@@ -19,8 +19,9 @@ export function AudioPlayerProvider({ children }) {
   const [isMuted, setIsMuted] = useState(false);
   const [playbackHistory, setPlaybackHistory] = useLocalStorageState(
     "plackbackHistory",
-    { defaultValue: [""] }
+    { defaultValue: [] }
   );
+  const [historyPointer, setHistoryPointer] = useState(0);
 
   useEffect(() => {
     audioRef.current = new Audio(audioDB[0].path);
@@ -57,6 +58,28 @@ export function AudioPlayerProvider({ children }) {
     setIsPlaying(!isPlaying);
   }
 
+  function playNewTrack(song) {
+    if (historyPointer !== 0) {
+      const newHistory = playbackHistory.slice(historyPointer);
+      setPlaybackHistory([song, ...newHistory]);
+    } else {
+      // Normales Verhalten (ganz vorne in der History)
+      if (!playbackHistory[0] || playbackHistory[0].id !== song.id) {
+        const trimmed =
+          playbackHistory.length >= 5
+            ? playbackHistory.slice(0, 4)
+            : playbackHistory;
+
+        setPlaybackHistory([song, ...trimmed]);
+      }
+    }
+
+    // Track setzen & abspielen
+    setCurrentSong(song);
+    handleTrackSelection(song.path);
+    setHistoryPointer(0); // weil wir wieder ganz vorne sind
+  }
+
   function handleTrackSelection(newPath) {
     // console.log(newPath);
     if (audioRef.current) {
@@ -68,10 +91,12 @@ export function AudioPlayerProvider({ children }) {
     }
   }
 
+  // Playback History
+
   function handlePlaybackHistory(songToAdd) {
     if (playbackHistory.length < 5) {
       console.log(playbackHistory.length);
-      if (playbackHistory[0].id !== songToAdd.id) {
+      if (!playbackHistory[0] || playbackHistory[0].id !== songToAdd.id) {
         setPlaybackHistory([songToAdd, ...playbackHistory]);
       }
     } else {
@@ -84,6 +109,34 @@ export function AudioPlayerProvider({ children }) {
       }
     }
   }
+
+  function handlePreviousTrack() {
+    console.log("historypointer:", historyPointer);
+    console.log(playbackHistory[historyPointer]);
+    if (playbackHistory.length === 1) {
+      console.log("Nur ein Song in der History!");
+      setCurrentSong(playbackHistory[historyPointer]);
+      handleTrackSelection(playbackHistory[historyPointer].path);
+      return;
+    }
+
+    if (!(historyPointer + 1 >= playbackHistory.length)) {
+      setHistoryPointer(historyPointer + 1);
+      setCurrentSong(playbackHistory[historyPointer + 1]);
+      handleTrackSelection(playbackHistory[historyPointer + 1].path);
+    }
+  }
+
+  function handleNextTrack() {
+    console.log("historypointerNext:", historyPointer - 1);
+    // console.log(playbackHistory[historyPointer]);
+
+    setCurrentSong(playbackHistory[historyPointer - 1]);
+    handleTrackSelection(playbackHistory[historyPointer - 1].path);
+    setHistoryPointer(historyPointer - 1);
+  }
+
+  //Volume Change
 
   function handleVolumeChange(event) {
     const newVolume = parseFloat(event.target.value);
@@ -136,6 +189,11 @@ export function AudioPlayerProvider({ children }) {
         handleMute,
         handleProgressBar,
         handlePlaybackHistory,
+        playbackHistory,
+        historyPointer,
+        handlePreviousTrack,
+        handleNextTrack,
+        playNewTrack,
       }}
     >
       {children}
