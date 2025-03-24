@@ -9,7 +9,7 @@ import PrevIcon from "@/components//PrevIcon/PrevIcon";
 import NextIcon from "@/components//NextIcon/NextIcon";
 import CurrentTrackDisplay from "@/components//CurrentTrackDisplay/CurrentTrackDisplay";
 import VolumeControl from "@/components//VolumeControl/VolumeControl";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function PlaybackControls() {
   const [playbackState, setPlaybackState] = useState(true);

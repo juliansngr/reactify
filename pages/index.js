@@ -3,7 +3,7 @@ import PlaybackControls from "@/components/PlaybackControls/PlaybackControls";
 
 import SongCollection from "@/components/SongCollection/SongCollection";
 import Header from "@/components/Header/Header";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import EmptySongCollection from "@/components/EmptySongCollection/EmptySongCollection";
 
 function Home() {
