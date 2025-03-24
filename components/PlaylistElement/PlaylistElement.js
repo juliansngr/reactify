@@ -15,7 +15,9 @@ export default function PlaylistElement({
         src={playlistImage}
         alt="Playlist Cover"
       ></img>
-      <p className="text-xl/5 mb-1">{playlistTitle}</p>
+      <p className="text-xl/5 mb-1  truncate max-w-40 mb-3 sm:max-w-48 md:max-w-66 lg:max-w-78 xl:max-w-84">
+        {playlistTitle}
+      </p>
       <p className="text-sm text-[#ababab] truncate max-w-40 mb-3 sm:max-w-48 md:max-w-66 lg:max-w-78 xl:max-w-84">
         {playlistDesc}
       </p>
@@ -55,12 +57,14 @@ export function CreatePlaylistElement({ onClick }) {
       image,
       tracks: [
         {
-          name: "Idea 1",
-          artist: "Gibran Alcocer",
-          cover: "../cover/idea1.webp",
-          path: "../audio/idea1.mp3",
-          year: "2022",
-          id: "13070a5b-a2f4-4fae-b93b-fd80130a5faa",
+          id: "3a13805e-715a-496e-ad04-6b88c68cc284",
+          title: "On My Mind",
+          artist: [{ name: "Curbi" }],
+          cover: "../cover/3a13805e-715a-496e-ad04-6b88c68cc284.webp",
+          path: "../audio/3a13805e-715a-496e-ad04-6b88c68cc284.mp3",
+          year: "2025",
+          genre: "house",
+          tags: ["energetic", "bouncy", "bass-driven"],
         },
       ],
     });
@@ -71,7 +75,7 @@ export function CreatePlaylistElement({ onClick }) {
       onClick={() => {
         setFormVisible(true);
       }}
-      className="relative flex flex-col items-start h-auto p-2 xl:p-6 rounded-2xl cursor-pointer transition-all duration-500 hover:bg-neutral-800 w-96 aspect-square"
+      className="relative flex flex-col items-start h-auto p-2 xl:p-6 rounded-2xl cursor-pointer transition-all duration-500 hover:bg-neutral-800 w-78 xl:w-96 aspect-square"
     >
       <div className="flex relative justify-center items-center size-full    border-[#ababab] bg-neutral-900 rounded-xl ">
         <div className="absolute top-5 left-5 w-6 h-6 border-t-2 border-l-2 rounded-tl-xl border-[#ababab]"></div>

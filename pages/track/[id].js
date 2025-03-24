@@ -83,10 +83,10 @@ export default function Track() {
             <span className="flex flex-col text-left">
               <p>Single</p>
               <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                {selectedTrack.name}
+                {selectedTrack.title}
               </h1>
               <h3 className="text-[#ababab]">
-                {selectedTrack.artist} - {selectedTrack.year}
+                {selectedTrack.artist[0].name} - {selectedTrack.year}
               </h3>
             </span>
           </div>
@@ -129,9 +129,9 @@ export default function Track() {
                 ▶
               </span>
               <span className="flex flex-col items-start">
-                <span className="text-lg">{selectedTrack.name}</span>
+                <span className="text-lg">{selectedTrack.title}</span>
                 <span className="text-sm text-[#ababab]">
-                  {selectedTrack.artist}
+                  {selectedTrack.artist[0].name}
                 </span>
               </span>
               <span>{duration}</span>

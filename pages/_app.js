@@ -29,8 +29,8 @@ if (!PUBLISHABLE_KEY) {
 
 export default function App({ Component, pageProps }) {
   return (
-    <PlaylistContextProvider>
-      <AudioPlayerProvider>
+    <AudioPlayerProvider>
+      <PlaylistContextProvider>
         <ClerkProvider
           publishableKey={PUBLISHABLE_KEY}
           afterSignOutUrl="/"
@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }) {
           </Head>
           <Component {...pageProps} />{" "}
         </ClerkProvider>
-      </AudioPlayerProvider>
-    </PlaylistContextProvider>
+      </PlaylistContextProvider>
+    </AudioPlayerProvider>
   );
 }

@@ -133,9 +133,8 @@ export default function SongCollection() {
               <Link href={`/track/${audio.id}`}>
                 <SingleSong
                   coverPath={audio.cover}
-                  songName={audio.name}
-                  artistName={audio.artist}
-                  key={audio.id}
+                  songName={audio.title}
+                  artistName={audio.artist[0].name}
                 />
               </Link>
             </div>
@@ -146,12 +145,11 @@ export default function SongCollection() {
       <div className="flex flex-col items-center">
         <h2 className="text-3xl">Playlists:</h2>
 
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap flex-col md:flex-row justify-center">
           {playlists.map((playlist) => {
             return (
-              <Link href={`/playlist/${playlist.id}`}>
+              <Link href={`/playlist/${playlist.id}`} key={playlist.id}>
                 <PlaylistElement
-                  coverPath={playlist.tracks[0].cover}
                   playlistTitle={playlist.title}
                   playlistDesc={playlist.description}
                   playlistImage={playlist.image}

@@ -11,7 +11,8 @@ import PlayPauseIcon from "@/components/PlayPauseIcon/PlayPauseIcon";
 import GeneralButton from "@/components/GeneralButton/GeneralButton";
 import { usePlaylistContext } from "@/utils/PlaylistContext/PlaylistContext";
 import AddIcon from "@/components/AddIcon/AddIcon";
-import SingleSong from "@/components/SingleSong/SingleSong";
+import { SingleSongSmall } from "@/components/SingleSong/SingleSong";
+import RemoveIcon from "@/components/RemoveIcon/RemoveIcon";
 
 export default function Track() {
   const {
@@ -24,7 +25,8 @@ export default function Track() {
     playNewTrack,
   } = useAudioPlayer();
 
-  const { playlists } = usePlaylistContext();
+  const { playlists, handleAddTrackToPlaylist, handleRemoveTrackFromPlaylist } =
+    usePlaylistContext();
 
   const router = useRouter();
 
@@ -102,9 +104,7 @@ export default function Track() {
           <div className="flex gap-10">
             <ControlButton
               className="bg-transparent border-none scale-150"
-              buttonImage={PlayPauseIcon(
-                isPlaying && selectedTrack === currentSong
-              )}
+              buttonImage={PlayPauseIcon(isPlaying)}
               //   onClick={() => {
               //     if (selectedTrack === currentSong) {
               //       togglePlayPause();
@@ -120,7 +120,7 @@ export default function Track() {
             <div className="flex justify-between items-center pl-5 pr-5">
               <span className="text-[#ababab]">#</span>
               <span className="text-[#ababab]">Track</span>
-              <span className="text-[#ababab]">Dauer</span>
+              <span className="text-[#ababab]">Remove</span>
             </div>
             <hr className="border-[#ababab] mb-5" />
             {selectedPlaylist.tracks.map((track, index) => {
@@ -129,8 +129,8 @@ export default function Track() {
                   key={track.id}
                   className="flex justify-between items-center py-2 px-5 rounded-md lg:hover:bg-[#212121] group"
                   onClick={() => {
-                    // setCurrentSong(selectedTrack);
-                    // playNewTrack(selectedTrack);
+                    setCurrentSong(track);
+                    playNewTrack(track);
                   }}
                 >
                   <span className=" block group-hover:hidden text-[#ababab] w-4">
@@ -140,12 +140,24 @@ export default function Track() {
                     ▶
                   </span>
                   <span className="flex flex-col items-start">
-                    <span className="text-lg">{track.name}</span>
+                    <span className="text-lg">{track.title}</span>
                     <span className="text-sm text-[#ababab]">
-                      {track.artist}
+                      {track.artist[0].name}
                     </span>
                   </span>
-                  <span>XX:XX</span>
+                  <span>
+                    <ControlButton
+                      buttonImage={RemoveIcon()}
+                      className=" scale-125 bg-transparent border-none size-8"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        handleRemoveTrackFromPlaylist(
+                          track.id,
+                          selectedPlaylist.id
+                        );
+                      }}
+                    />
+                  </span>
                 </div>
               );
             })}
@@ -162,30 +174,18 @@ export default function Track() {
                 return (
                   <div class="relative group" key={audio.id}>
                     <ControlButton
-                      className="opacity-0 scale-125 invisible absolute right-10 bottom-20 z-10 bg-transparent border-none transition-all duration-300 md:group-hover:bottom-24 md:group-hover:opacity-100 md:group-hover:visible"
-                      buttonImage={PlayPauseIcon(
-                        isPlaying && audio === currentSong
-                      )}
+                      className="opacity-0 scale-100 invisible absolute right-10 bottom-20 z-10 bg-transparent border-none transition-all duration-300 md:group-hover:bottom-24 md:group-hover:opacity-100 md:group-hover:visible"
+                      buttonImage={AddIcon()}
                       onClick={() => {
-                        if (audio === currentSong) {
-                          handlePlaybackHistory(audio);
-
-                          togglePlayPause();
-                        } else {
-                          handlePlaybackHistory(audio);
-                          setCurrentSong(audio);
-                          playNewTrack(audio);
-                          // handleTrackSelection(audio.path);
-                        }
+                        handleAddTrackToPlaylist(audio.id, selectedPlaylist.id);
                       }}
                     />
 
                     <Link href={`/track/${audio.id}`}>
-                      <SingleSong
+                      <SingleSongSmall
                         coverPath={audio.cover}
-                        songName={audio.name}
-                        artistName={audio.artist}
-                        key={audio.id}
+                        songName={audio.title}
+                        artistName={audio.artist[0].name}
                       />
                     </Link>
                   </div>
