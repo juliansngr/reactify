@@ -15,10 +15,6 @@ import { useAuth } from "@clerk/nextjs";
 export default function Track() {
   const { userId, isLoaded } = useAuth();
 
-  if (!isLoaded) return <p>Lädt...</p>;
-
-  if (!userId) return <p>Kein Zugriff!</p>;
-
   const {
     audioDB,
     setCurrentSong,
@@ -62,6 +58,10 @@ export default function Track() {
       setDuration(durationString);
     });
   }
+
+  if (!isLoaded) return <p>Lädt...</p>;
+
+  if (!userId) return <p>Kein Zugriff!</p>;
 
   if (!selectedTrack) {
     return (
