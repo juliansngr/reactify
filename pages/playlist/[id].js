@@ -38,11 +38,13 @@ export default function Track() {
     return playlist.id === id;
   });
 
-  const songsPossibleToAdd = audioDB.filter((trackDB) => {
-    return !selectedPlaylist.tracks.find(
-      (trackPlay) => trackPlay.id === trackDB.id
-    );
-  });
+  const songsPossibleToAdd = selectedPlaylist?.tracks
+    ? audioDB.filter((trackDB) => {
+        return !selectedPlaylist.tracks.find(
+          (trackPlay) => trackPlay.id === trackDB.id
+        );
+      })
+    : [];
 
   function toggleSongSection() {
     setSongSectionVisibility(!songSectionVisibility);
