@@ -32,8 +32,8 @@ export default function PlaybackControls() {
       <div className="flex justify-between items-center flex-col gap-5 lg:flex-row bg-gradient-to-t from-black to-neutral-800/90 lg:bg-black lg:bg-none py-5 fixed bottom-0 w-full z-50 [clip-path:ellipse(100%_60%_at_50%_60%)] lg:[clip-path:none]">
         <div className="flex items-center pl-4">
           <CurrentTrackDisplay
-            songName={currentSong.name}
-            artistName={currentSong.artist}
+            songName={currentSong.title}
+            artistName={currentSong.artist[0].name}
             coverPath={currentSong.cover}
           />
         </div>
