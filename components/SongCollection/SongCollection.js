@@ -10,6 +10,10 @@ import Link from "next/link";
 import PlayPauseIcon from "@/components//PlayPauseIcon/PlayPauseIcon";
 import ControlButton from "@/components//ControlButton/ControlButton";
 import GeneralButton from "@/components//GeneralButton/GeneralButton";
+import PlaylistElement, {
+  CreatePlaylistElement,
+} from "../PlaylistElement/PlaylistElement";
+import { usePlaylistContext } from "@/utils/PlaylistContext/PlaylistContext";
 
 export default function SongCollection() {
   const {
@@ -22,6 +26,8 @@ export default function SongCollection() {
     handlePlaybackHistory,
     playNewTrack,
   } = useAudioPlayer();
+
+  const { playlists } = usePlaylistContext();
 
   const [randomTrackState, setRandomTrackState] = useState([]);
 
@@ -135,6 +141,27 @@ export default function SongCollection() {
             </div>
           );
         })}
+        <hr className="flex justify-center items-center my-20 border-[#ababab] w-[90vw]" />
+      </div>
+      <div className="flex flex-col items-center">
+        <h2 className="text-3xl">Playlists:</h2>
+
+        <div className="flex flex-wrap justify-center">
+          {playlists.map((playlist) => {
+            return (
+              <Link href={`/playlist/${playlist.id}`}>
+                <PlaylistElement
+                  coverPath={playlist.tracks[0].cover}
+                  playlistTitle={playlist.title}
+                  playlistDesc={playlist.description}
+                  playlistImage={playlist.image}
+                  key={playlist.id}
+                />
+              </Link>
+            );
+          })}
+          <CreatePlaylistElement />
+        </div>
       </div>
       <div className="flex justify-center items-center flex-col pt-24">
         <div className="flex mb-6">

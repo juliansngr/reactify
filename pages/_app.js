@@ -9,6 +9,7 @@ import { dark } from "@clerk/themes";
 
 import { AudioPlayerProvider } from "../utils/AudioPlayerContext/AudioPlayerContext";
 import Head from "next/head";
+import { PlaylistContextProvider } from "@/utils/PlaylistContext/PlaylistContext";
 
 // Clerk Authentication
 const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
@@ -28,35 +29,37 @@ if (!PUBLISHABLE_KEY) {
 
 export default function App({ Component, pageProps }) {
   return (
-    <AudioPlayerProvider>
-      <ClerkProvider
-        publishableKey={PUBLISHABLE_KEY}
-        afterSignOutUrl="/"
-        appearance={{
-          baseTheme: dark,
-        }}
-      >
-        <Head>
-          {" "}
-          <link rel="icon" type="image/png" href="/favicon.png" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <title>
-            Reactify - Spotify Clone using React, Next and TailwindCSS
-          </title>
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-          />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols"
-          />
-        </Head>
-        <Component {...pageProps} />{" "}
-      </ClerkProvider>
-    </AudioPlayerProvider>
+    <PlaylistContextProvider>
+      <AudioPlayerProvider>
+        <ClerkProvider
+          publishableKey={PUBLISHABLE_KEY}
+          afterSignOutUrl="/"
+          appearance={{
+            baseTheme: dark,
+          }}
+        >
+          <Head>
+            {" "}
+            <link rel="icon" type="image/png" href="/favicon.png" />
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <title>
+              Reactify - Spotify Clone using React, Next and TailwindCSS
+            </title>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            />
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Material+Symbols"
+            />
+          </Head>
+          <Component {...pageProps} />{" "}
+        </ClerkProvider>
+      </AudioPlayerProvider>
+    </PlaylistContextProvider>
   );
 }

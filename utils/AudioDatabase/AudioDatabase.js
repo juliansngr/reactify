@@ -5,7 +5,7 @@ export const audioDatabase = [
     cover: "../cover/idea1.webp",
     path: "../audio/idea1.mp3",
     year: "2022",
-    id: crypto.randomUUID(),
+    id: "13070a5b-a2f4-4fae-b93b-fd80130a5faa",
   },
   {
     name: "Idea 5",
@@ -13,7 +13,7 @@ export const audioDatabase = [
     cover: "../cover/idea5.webp",
     path: "../audio/idea5.mp3",
     year: "2024",
-    id: crypto.randomUUID(),
+    id: "03aff24e-58f1-439a-a680-776b29324883",
   },
   {
     name: "Idea 9",
@@ -21,7 +21,7 @@ export const audioDatabase = [
     cover: "../cover/idea9.webp",
     path: "../audio/idea9.mp3",
     year: "2023",
-    id: crypto.randomUUID(),
+    id: "94360634-6309-4a26-a368-59f4c80214ca",
   },
   {
     name: "Idea 10",
@@ -29,7 +29,7 @@ export const audioDatabase = [
     cover: "../cover/idea10.webp",
     path: "../audio/idea10.mp3",
     year: "2022",
-    id: crypto.randomUUID(),
+    id: "02ed5347-e98e-404f-9bc8-455580f572fb",
   },
   {
     name: "Idea 15",
@@ -37,7 +37,7 @@ export const audioDatabase = [
     cover: "../cover/idea15.webp",
     path: "../audio/idea15.mp3",
     year: "2023",
-    id: crypto.randomUUID(),
+    id: "a8142fc0-7d1a-4819-b3d4-6ca9ae3b3fdd",
   },
   {
     name: "Idea 22",
@@ -45,6 +45,6 @@ export const audioDatabase = [
     cover: "../cover/idea22.webp",
     path: "../audio/idea22.mp3",
     year: "2022",
-    id: crypto.randomUUID(),
+    id: "719df66a-93d7-4acd-a249-3b4b56c2adcb",
   },
 ];
