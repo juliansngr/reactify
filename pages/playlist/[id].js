@@ -39,7 +39,6 @@ export default function Track() {
   });
 
   const songsPossibleToAdd = audioDB.filter((trackDB) => {
-    // console.log("trackDB: ", trackDB.id);
     return !selectedPlaylist.tracks.find(
       (trackPlay) => trackPlay.id === trackDB.id
     );
@@ -123,44 +122,45 @@ export default function Track() {
               <span className="text-[#ababab]">Remove</span>
             </div>
             <hr className="border-[#ababab] mb-5" />
-            {selectedPlaylist.tracks.map((track, index) => {
-              return (
-                <div
-                  key={track.id}
-                  className="flex justify-between items-center py-2 px-5 rounded-md lg:hover:bg-[#212121] group"
-                  onClick={() => {
-                    setCurrentSong(track);
-                    playNewTrack(track);
-                  }}
-                >
-                  <span className=" block group-hover:hidden text-[#ababab] w-4">
-                    {index + 1}
-                  </span>
-                  <span className=" hidden group-hover:block text-[#ababab] w-4">
-                    ▶
-                  </span>
-                  <span className="flex flex-col items-start">
-                    <span className="text-lg">{track.title}</span>
-                    <span className="text-sm text-[#ababab]">
-                      {track.artist[0].name}
+            {selectedPlaylist &&
+              selectedPlaylist.tracks.map((track, index) => {
+                return (
+                  <div
+                    key={track.id}
+                    className="flex justify-between items-center py-2 px-5 rounded-md lg:hover:bg-[#212121] group"
+                    onClick={() => {
+                      setCurrentSong(track);
+                      playNewTrack(track);
+                    }}
+                  >
+                    <span className=" block group-hover:hidden text-[#ababab] w-4">
+                      {index + 1}
                     </span>
-                  </span>
-                  <span>
-                    <ControlButton
-                      buttonImage={RemoveIcon()}
-                      className=" scale-125 bg-transparent border-none size-8"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        handleRemoveTrackFromPlaylist(
-                          track.id,
-                          selectedPlaylist.id
-                        );
-                      }}
-                    />
-                  </span>
-                </div>
-              );
-            })}
+                    <span className=" hidden group-hover:block text-[#ababab] w-4">
+                      ▶
+                    </span>
+                    <span className="flex flex-col items-start">
+                      <span className="text-lg">{track.title}</span>
+                      <span className="text-sm text-[#ababab]">
+                        {track.artist[0].name}
+                      </span>
+                    </span>
+                    <span>
+                      <ControlButton
+                        buttonImage={RemoveIcon()}
+                        className=" scale-125 bg-transparent border-none size-8"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleRemoveTrackFromPlaylist(
+                            track.id,
+                            selectedPlaylist.id
+                          );
+                        }}
+                      />
+                    </span>
+                  </div>
+                );
+              })}
           </div>
         </div>
         <ControlButton
