@@ -74,12 +74,12 @@ export function CreatePlaylistElement({ onClick }) {
       className="relative flex flex-col items-start h-auto p-2 xl:p-6 rounded-2xl cursor-pointer transition-all duration-500 hover:bg-neutral-800 w-96 aspect-square"
     >
       <div className="flex relative justify-center items-center size-full    border-[#ababab] bg-neutral-900 rounded-xl ">
-        <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 rounded-tl-xl border-[#ababab]"></div>
-        <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 rounded-tr-xl border-[#ababab]"></div>
-        <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 rounded-bl-xl border-[#ababab]"></div>
-        <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 rounded-br-xl border-[#ababab]"></div>
+        <div className="absolute top-5 left-5 w-6 h-6 border-t-2 border-l-2 rounded-tl-xl border-[#ababab]"></div>
+        <div className="absolute top-5 right-5 w-6 h-6 border-t-2 border-r-2 rounded-tr-xl border-[#ababab]"></div>
+        <div className="absolute bottom-5 left-5 w-6 h-6 border-b-2 border-l-2 rounded-bl-xl border-[#ababab]"></div>
+        <div className="absolute bottom-5 right-5 w-6 h-6 border-b-2 border-r-2 rounded-br-xl border-[#ababab]"></div>
         {!formVisible ? (
-          <span class="material-symbols-outlined  text-[#ababab]">
+          <span class="material-symbols-outlined !text-4xl text-[#ababab] ">
             add_circle
           </span>
         ) : (
