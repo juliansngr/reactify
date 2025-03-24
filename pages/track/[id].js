@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/Header/Header";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -9,8 +10,15 @@ import PlaybackControls from "@/components/PlaybackControls/PlaybackControls";
 import ControlButton from "@/components/ControlButton/ControlButton";
 import PlayPauseIcon from "@/components/PlayPauseIcon/PlayPauseIcon";
 import GeneralButton from "@/components/GeneralButton/GeneralButton";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Track() {
+  const { userId, isLoaded } = useAuth();
+
+  if (!isLoaded) return <p>Lädt...</p>;
+
+  if (!userId) return <p>Kein Zugriff!</p>;
+
   const {
     audioDB,
     setCurrentSong,

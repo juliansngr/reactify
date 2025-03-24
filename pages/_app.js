@@ -4,7 +4,7 @@ import "@/styles/globals.css";
 // import App from "./App.jsx";
 // import Track from "./Track.jsx";
 // import NotFoundPage from "./NotFoundPage.jsx";
-import { ClerkProvider } from "@clerk/clerk-react";
+import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
 import { AudioPlayerProvider } from "../utils/AudioPlayerContext/AudioPlayerContext";
