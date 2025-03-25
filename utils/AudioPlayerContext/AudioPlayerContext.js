@@ -52,10 +52,11 @@ export function AudioPlayerProvider({ children }) {
   function togglePlayPause() {
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
       audioRef.current.play();
+      setIsPlaying(true);
     }
-    setIsPlaying(!isPlaying);
   }
 
   function playNewTrack(song) {
