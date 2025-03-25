@@ -102,10 +102,10 @@ export default function Track() {
             <ControlButton
               className="bg-transparent border-none scale-150"
               buttonImage={PlayPauseIcon(
-                isPlaying && selectedTrack === currentSong
+                isPlaying && selectedTrack.id === currentSong.id
               )}
               onClick={() => {
-                if (selectedTrack === currentSong) {
+                if (selectedTrack.id === currentSong.id) {
                   togglePlayPause();
                 } else {
                   setCurrentSong(selectedTrack);

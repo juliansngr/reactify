@@ -115,9 +115,11 @@ export default function SongCollection() {
             <div class="relative group" key={audio.id}>
               <ControlButton
                 className="opacity-0 scale-125 invisible absolute right-10 bottom-20 z-10 bg-transparent border-none transition-all duration-300 md:group-hover:bottom-24 md:group-hover:opacity-100 md:group-hover:visible"
-                buttonImage={PlayPauseIcon(isPlaying && audio === currentSong)}
+                buttonImage={PlayPauseIcon(
+                  isPlaying && audio.id === currentSong.id
+                )}
                 onClick={() => {
-                  if (audio === currentSong) {
+                  if (audio.id === currentSong.id) {
                     handlePlaybackHistory(audio);
 
                     togglePlayPause();
